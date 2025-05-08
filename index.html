@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador de QR Code com Redirecionamento</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        input,
+        button {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        #qrcode {
+            margin-top: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Gerar QR Code com Redirecionamento Inteligente</h2>
+
+    <label>Link da Play Store (Android)</label>
+    <input type="url" id="android" placeholder="https://play.google.com/store/apps/details?id=...">
+
+    <label>Link da App Store (iOS)</label>
+    <input type="url" id="ios" placeholder="https://apps.apple.com/app/id...">
+
+    <label>Link Fallback (Desktop ou outro)</label>
+    <input type="url" id="fallback" placeholder="https://seusite.com" value="https://seusite.com">
+
+    <button onclick="gerarQRCode()">Gerar Link + QR Code</button>
+
+    <div id="resultado" style="display:none;">
+        <h3>URL Gerada:</h3>
+        <p><a href="#" target="_blank" id="url-final"></a></p>
+
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        function gerarQRCode() {
+            const baseURL = "https://apps.seusite.com/redirect.html"; // Substitua pelo seu domínio real
+            const android = encodeURIComponent(document.getElementById("android").value);
+            const ios = encodeURIComponent(document.getElementById("ios").value);
+            const fallback = encodeURIComponent(document.getElementById("fallback").value);
+
+            const finalURL = `${baseURL}?android=${android}&ios=${ios}&fallback=${fallback}`;
+
+            document.getElementById("url-final").textContent = finalURL;
+            document.getElementById("url-final").href = finalURL;
+            document.getElementById("resultado").style.display = "block";
+
+            // Gera o QR Code
+            QRCode.toCanvas(document.createElement("canvas"), finalURL, function (err, canvas) {
+                const qrcodeDiv = document.getElementById("qrcode");
+                qrcodeDiv.innerHTML = ""; // Limpa anterior
+                if (err) return console.error(err);
+                qrcodeDiv.appendChild(canvas);
+            });
+        }
+    </script>
+</body>
+
+</html>

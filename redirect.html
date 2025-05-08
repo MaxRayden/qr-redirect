@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecionando...</title>
+    <script>
+        function getParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        window.onload = function () {
+            const ua = navigator.userAgent.toLowerCase();
+
+            const androidLink = getParam('android');
+            const iosLink = getParam('ios');
+            const fallbackLink = getParam('fallback') || 'https://seusite.com';
+
+            if (/android/.test(ua) && androidLink) {
+                window.location.href = androidLink;
+            } else if (/iphone|ipad|ipod/.test(ua) && iosLink) {
+                window.location.href = iosLink;
+            } else {
+                window.location.href = fallbackLink;
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <p>Redirecionando para a loja do seu dispositivo...</p>
+</body>
+
+</html>

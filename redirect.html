@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <title>Redirecionando...</title>
@@ -15,14 +14,16 @@
 
             const androidLink = getParam('android');
             const iosLink = getParam('ios');
-            const fallbackLink = getParam('fallback') || 'https://seusite.com';
+            const fallbackLink = getParam('fallback');
 
             if (/android/.test(ua) && androidLink) {
                 window.location.href = androidLink;
             } else if (/iphone|ipad|ipod/.test(ua) && iosLink) {
                 window.location.href = iosLink;
-            } else {
+            } else if (fallbackLink) {
                 window.location.href = fallbackLink;
+            } else {
+                alert("Nenhum link de redirecionamento válido foi encontrado.");
             }
         };
     </script>

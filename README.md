@@ -1,6 +1,7 @@
 # 📱 QR Redirect
 
 QR Redirect é uma aplicação web simples e funcional que permite gerar QR Codes para URLs com redirecionamento inteligente. Ideal para assinaturas, materiais promocionais e muito mais, a aplicação facilita a criação e visualização de códigos QR personalizados.
+O QR Redirect está disponível para uso em: https://maxrayden.github.io/qr-redirect/
 
 ---
 

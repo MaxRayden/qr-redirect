@@ -40,7 +40,9 @@
                 <input type="url" id="fallback" placeholder="https://seusite.com">
 
                 <label>Imagem PNG para o centro do QR Code (opcional)</label>
-                <input type="file" id="logo-upload" accept="image/png">
+                <input type="file" id="logo-upload" accept="image/png" style="display: none;">
+                <button type="button" id="upload-trigger"> Upload de Imagem PNG</button>
+                <span id="file-name" style="display: block; margin-top: 0.5rem; font-size: 0.9rem; color: #888;"></span>
                 <button onclick="gerarQRCode()">Gerar Link + QR Code</button>
 
                 <div id="resultado" style="display:none;">
@@ -62,6 +64,8 @@
                     <li>Copie o link do seu aplicativo na <strong>Play Store</strong> (Android).</li>
                     <li>Copie o link do seu aplicativo na <strong>App Store</strong> (iOS).</li>
                     <li>Adicione um <strong>link alternativo (fallback)</strong>, como o seu site oficial.</li>
+                    <li>Faça o upload de uma imagem da sua preferencia para posicionar ao centro do QR Code.
+                    </li>
                     <li>Clique em <strong>"Gerar Link + QR Code"</strong>.</li>
                     <li>Use o link ou QR Code gerado para divulgação. Ele detectará o dispositivo e redirecionará
                         automaticamente.</li>
@@ -156,6 +160,14 @@
             document.querySelectorAll(".sidebar nav li").forEach(li => li.classList.remove("active"));
             document.querySelectorAll(".sidebar nav li a")[1].parentElement.classList.add("active");
         }
+        // configuração do botão de upload de imagem
+        document.getElementById("upload-trigger").addEventListener("click", function () {
+            document.getElementById("logo-upload").click();
+        }); document.getElementById("logo-upload").addEventListener("change", function () {
+            const fileName = this.files.length > 0 ? this.files[0].name : "";
+            document.getElementById("file-name").textContent = fileName;
+        });
+
 
     </script>
 </body>
